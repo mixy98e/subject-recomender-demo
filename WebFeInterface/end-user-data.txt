@@ -1,0 +1,63 @@
+//Load sample data
+var sampleData = new ModulePrediction.ModelInput()
+{
+    GENDER = @"Female",
+    AGE = 20F,
+    AVERAGE_GRADE = 6.15F,
+    FINAL_GRADE = 7.15F,
+    NUMBER_OF_YEARS_STUDIED = 5F,
+    AVERAGE_TEST_TAKEN = 3.4F,
+    MAX_TEST_TAKEN = 3F,
+    AVERAGE_OVERFLOW_EXAM = 2F,
+};
+//Load model and predict output
+var result = ModulePrediction.Predict(sampleData);
+
+
+//Load sample data
+var sampleData = new Subject1Prediction.ModelInput()
+{
+    GENDER = @"Male",
+    AGE = 20F,
+    AVERAGE_GRADE = 6.15F,
+    FINAL_GRADE = 7.15F,
+    NUMBER_OF_YEARS_STUDIED = 5F,
+    AVERAGE_TEST_TAKEN = 3.4F,
+    MAX_TEST_TAKEN = 3F,
+    AVERAGE_OVERFLOW_EXAM = 2F,
+    CHOOSEN_MODULE_ID = 1F,
+};
+//Load model and predict output
+var result = Subject1Prediction.Predict(sampleData);
+
+//Load sample data
+var sampleData = new Subject2Prediction.ModelInput()
+{
+    GENDER = @"Male",
+    AGE = 20F,
+    AVERAGE_GRADE = 6.15F,
+    FINAL_GRADE = 7.15F,
+    NUMBER_OF_YEARS_STUDIED = 5F,
+    AVERAGE_TEST_TAKEN = 3.4F,
+    MAX_TEST_TAKEN = 3F,
+    AVERAGE_OVERFLOW_EXAM = 2F,
+    CHOOSEN_MODULE_ID = 1F,
+};
+//Load model and predict output
+var result = Subject2Prediction.Predict(sampleData);
+
+//Load sample data
+var sampleData = new Subject3Prediction.ModelInput()
+{
+    GENDER = @"Male",
+    AGE = 20F,
+    AVERAGE_GRADE = 6.15F,
+    FINAL_GRADE = 7.15F,
+    NUMBER_OF_YEARS_STUDIED = 5F,
+    AVERAGE_TEST_TAKEN = 3.4F,
+    MAX_TEST_TAKEN = 3F,
+    AVERAGE_OVERFLOW_EXAM = 2F,
+    CHOOSEN_MODULE_ID = 1F,
+};
+//Load model and predict output
+var result = Subject3Prediction.Predict(sampleData);

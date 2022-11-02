@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <title>NanoBankApp test gui</title>
+    </head>
+
+    <body onload="onloadBody()">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#"><strong>Nano Bank App</strong></a>
+        </nav>
+        <div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <h3>Student data entry form</h3>
+                    <form>
+                        <div class="form-group">
+                            <label style="margin-left: 20px;" for="exampleFormControlSelect1"><strong>Select Action</strong></label>
+                            <select class="form-control" id="exampleFormControlSelect1" onchange="setTypeInputParameter(this)">
+                                <option>Module</option>
+                                <option>Subject 1</option>
+                                <option>Subject 2</option>
+                                <option>Subject 3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group separator"></div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control inp-gender" name="gender" onchange="setInputParameter(this)" placeholder="Gender" value="" />
+                            <input type="text" class="form-control inp-age" name="age" onchange="setInputParameter(this)" placeholder="Age" value="" />
+                            <input type="number" class="form-control inp-avg-grade" name="averageGrade" onchange="setInputParameter(this)" placeholder="Average grade" value="" />
+                            <input type="number" class="form-control inp-final-grade" name="finalGrade" onchange="setInputParameter(this)" placeholder="Final grade" value="" />
+                            <input type="number" class="form-control inp-number-ofy-studied" name="numberOfYearsStudied" onchange="setInputParameter(this)" placeholder="Number of years studied" value="" />
+                            <input type="number" class="form-control inp-year-study-start" name="studyStartYear" onchange="setInputParameter(this)" placeholder="Study start year" value="" />
+                            <input type="number" class="form-control inp-avg-test-taken" name="averageNumberOfTestTaken" onchange="setInputParameter(this)" placeholder="Average number of test taken" value="" />
+                            <input type="number" class="form-control inp-max-test-taken" name="maximumNumberOfTestTaken" onchange="setInputParameter(this)" placeholder="Maximum number of test taken" value="" />
+                            <input type="number" class="form-control inp-avg-ovf-exam" name="averageNumberOfOverflowExams" onchange="setInputParameter(this)" placeholder="Average number of overflow exams" value="" />
+                            <input type="number" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" />
+                        </div>
+                        <div class="form-group execute-button">
+                            <input class="btnSubmit" value="Recommend" onclick="requestRecommendation()" />
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 login-form-2">
+                    <h3>Available modules and subjects</h3>
+                    <!-- <form>
+                        <div class="acc-data-cont">
+                            <div class="acc-data">
+                                <label style="margin-left: 20px;"><strong>Source Account</strong></label>
+                                <ul class="list-group list-group-flush acc-1">
+                                    <li class="list-group-item li-id">Id</li>
+                                    <li class="list-group-item li-name">Name</li>
+                                    <li class="list-group-item li-address">Address</li>
+                                    <li class="list-group-item li-balance">Balance</li>
+                                    <li class="list-group-item li-status">Status</li>
+                                </ul>
+                            </div>
+                            <div class="acc-data">
+                                <label style="margin-left: 20px;"><strong>Destination Account</strong></label>
+                                <ul class="list-group list-group-flush acc-2">
+                                    <li class="list-group-item li-id">id</li>
+                                    <li class="list-group-item li-name">Name</li>
+                                    <li class="list-group-item li-address">Address</li>
+                                    <li class="list-group-item li-balance">Balance</li>
+                                    <li class="list-group-item li-status">Status</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form> -->
+                    <form>
+                    <div class="form-group-2">
+                        <label style="margin-left: 20px;" for="exampleFormControlSelect2"><strong>Select data type</strong></label>
+                        <select class="form-control" id="exampleFormControlSelect2" onchange="setSourceDataTableView(this)">
+                            <option>Modules</option>
+                            <option>Subjects</option>
+                        </select>
+                    </div>
+                </form>
+                    <div class="subject-data-cont">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Code</th>
+                                <th scope="col">Subject name</th>
+                                <th scope="col">ESPB</th>
+                            </tr>
+                            </thead>
+                            <tbody class="subject-table-body-data scrollable">
+        
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="module-data-cont">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Module name</th>
+                            </tr>
+                            </thead>
+                            <tbody class="module-table-body-data">
+        
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div  class="alert alert-primary" role="alert">
+                
+            </div>
+            <div  class="alert alert-danger" role="alert">
+                
+            </div>
+            <br>
+            <div class="row tb-row" style="border-top: 1px solid lightgray;">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Module</th>
+                        <th scope="col">Subject 1</th>
+                        <th scope="col">Subject 2</th>
+                        <th scope="col">Subject 3</th>
+                        <th scope="col">Average score</th>
+                        <th scope="col">Maximum score</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-body-data">
+
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <div style="text-align: end; width:100%">
+                Nano_Bank_App demo project © 2021.
+            </div>
+        </nav>
+        
+    </body>
+    <script src="index.js"></script>
+</html>

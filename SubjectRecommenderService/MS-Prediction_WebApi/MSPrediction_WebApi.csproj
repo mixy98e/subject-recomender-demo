@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<!--<Compile Remove="Subject1Prediction.consumption.cs" />-->
+		<!--<Compile Remove="Subject1Prediction.training.cs" />-->
+		<!--<Compile Remove="Subject2Prediction.consumption.cs" />-->
+		<!--<Compile Remove="Subject2Prediction.training.cs" />-->
+		<!--<Compile Remove="Subject3Prediction.consumption.cs" />-->
+		<!--<Compile Remove="Subject3Prediction.training.cs" />-->
+		<!--<Compile Remove="ModulePrediction.consumption.cs" />-->
+		<!--<Compile Remove="ModulePrediction.training.cs" />-->
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.ML" Version="1.5.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+		<PackageReference Include="Microsoft.ML" Version="1.6.0" />
+		<PackageReference Include="Microsoft.ML.FastTree" Version="1.6.0" />
+	</ItemGroup>
+	<ItemGroup Label="Subject1Prediction">
+		<None Include="Subject1Prediction.consumption.cs">
+			<DependentUpon>Subject1Prediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="Subject1Prediction.training.cs">
+			<DependentUpon>Subject1Prediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="Subject1Prediction.zip">
+			<DependentUpon>Subject1Prediction.mbconfig</DependentUpon>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup Label="Subject2Prediction">
+		<None Include="Subject2Prediction.consumption.cs">
+			<DependentUpon>Subject2Prediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="Subject2Prediction.training.cs">
+			<DependentUpon>Subject2Prediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="Subject2Prediction.zip">
+			<DependentUpon>Subject2Prediction.mbconfig</DependentUpon>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup Label="Subject3Prediction">
+		<None Include="Subject3Prediction.consumption.cs">
+			<DependentUpon>Subject3Prediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="Subject3Prediction.training.cs">
+			<DependentUpon>Subject3Prediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="Subject3Prediction.zip">
+			<DependentUpon>Subject3Prediction.mbconfig</DependentUpon>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup Label="ModulePrediction">
+		<None Include="ModulePrediction.consumption.cs">
+			<DependentUpon>ModulePrediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="ModulePrediction.training.cs">
+			<DependentUpon>ModulePrediction.mbconfig</DependentUpon>
+		</None>
+		<None Include="ModulePrediction.zip">
+			<DependentUpon>ModulePrediction.mbconfig</DependentUpon>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>
