@@ -5,12 +5,12 @@
     <head>
         <link rel="stylesheet" href="styles.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <title>NanoBankApp test gui</title>
+        <title>Sub and module recommender</title>
     </head>
 
     <body onload="onloadBody()">
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#"><strong>Nano Bank App</strong></a>
+            <a class="navbar-brand" href="#"><strong>SUBJECT & MODULE RECOMMENDER DEMO</strong></a>
         </nav>
         <div class="container login-container">
             <div class="row">
@@ -25,6 +25,7 @@
                                 <option>Subject 2</option>
                                 <option>Subject 3</option>
                             </select>
+                            <input type="number" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" />
                         </div>
 
                         <div class="form-group separator"></div>
@@ -39,7 +40,6 @@
                             <input type="number" class="form-control inp-avg-test-taken" name="averageNumberOfTestTaken" onchange="setInputParameter(this)" placeholder="Average number of test taken" value="" />
                             <input type="number" class="form-control inp-max-test-taken" name="maximumNumberOfTestTaken" onchange="setInputParameter(this)" placeholder="Maximum number of test taken" value="" />
                             <input type="number" class="form-control inp-avg-ovf-exam" name="averageNumberOfOverflowExams" onchange="setInputParameter(this)" placeholder="Average number of overflow exams" value="" />
-                            <input type="number" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" />
                         </div>
                         <div class="form-group execute-button">
                             <input class="btnSubmit" value="Recommend" onclick="requestRecommendation()" />
@@ -101,6 +101,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Id</th>
+                                <th scope="col">Code</th>
                                 <th scope="col">Module name</th>
                             </tr>
                             </thead>
@@ -123,12 +124,12 @@
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Module</th>
-                        <th scope="col">Subject 1</th>
-                        <th scope="col">Subject 2</th>
-                        <th scope="col">Subject 3</th>
+                        <th scope="col">Object type</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Average score</th>
                         <th scope="col">Maximum score</th>
+                        <th scope="col">Minimum score</th>
                       </tr>
                     </thead>
                     <tbody class="table-body-data">
