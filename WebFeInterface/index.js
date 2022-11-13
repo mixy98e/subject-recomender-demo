@@ -246,6 +246,10 @@ function processRecommenderResponseData(objType, data) {
   let objectName = objType === 'Module' ? 
                   getModulesByIndex(data.prediction, 1) :
                   getSubjectByIndex(data.prediction, 1);
+        
+  if( objType === 'Module')
+    lastPredictedModuleId = prediction;
+
   let maxScore = calculateMaximumScore(data.score);
   let averageScore = calculateAverageScore(data.score);
   let minScore = calculateMinimumScore(data.score);
@@ -293,6 +297,7 @@ function calculateMinimumScore(array) {
 function resetPredictionResultTable() {
   let tblBody = document.querySelector(".table-body-data");
   tblBody.innerHTML = "";
+  lastPredictedModuleId = -1;
 }
 
 function loadPredictionResultInDatatable(type, id, name, max, avg, min) {
@@ -317,4 +322,22 @@ function loadPredictionResultInDatatable(type, id, name, max, avg, min) {
   cell.appendChild(document.createTextNode(min));
   row.appendChild(cell);
   tblBody.appendChild(row);
+}
+
+let lastPredictedModuleId = -1;
+
+function invokeExternalIndex(externalFunctionName) {
+  switch (externalFunctionName) {
+    case 'progressNext':
+      document.getElementById("js-index-merge-progress-next").click()
+      break;
+    
+    case 'progressPrev' :
+      document.getElementById("js-index-merge-progress-next").click()
+      break;
+
+
+    default: break;
+  }
+  console.log('External function: -> ' + externalFunctionName + '() has been invoked');
 }

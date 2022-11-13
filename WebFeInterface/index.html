@@ -4,6 +4,7 @@
 
     <head>
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="stageProgressBar-styles.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <title>Sub and module recommender</title>
     </head>
@@ -12,11 +13,34 @@
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#"><strong>SUBJECT & MODULE RECOMMENDER DEMO</strong></a>
         </nav>
+        <div class="flex-center-container">
+            <div class="stage-progress-bar-container">
+                <div id="progress">
+                    <div id="progress-bar"></div>
+                    <ul id="progress-num">
+                    <li class="step active">Predict</li>
+                    <li class="step">Module</li>
+                    <li class="step">Subject 1</li>
+                    <li class="step">Subject 2</li>
+                    <li class="step">Subject 3</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="container login-container">
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <h3>Student data entry form</h3>
                     <form>
+                        <div class="form-group">
+                            <label style="margin-left: 20px;" for="exampleFormControlSelect2"><strong>Select Action</strong></label>
+                            <select class="form-control" id="exampleFormControlSelect2" onchange="">
+                                <option>Separate recommandation</option>
+                                <option>Per stage recommandation</option>
+                            </select>
+                            <input type="number" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" />
+                        </div>
+
                         <div class="form-group">
                             <label style="margin-left: 20px;" for="exampleFormControlSelect1"><strong>Select Action</strong></label>
                             <select class="form-control" id="exampleFormControlSelect1" onchange="setTypeInputParameter(this)">
@@ -42,7 +66,14 @@
                             <input type="number" class="form-control inp-avg-ovf-exam" name="averageNumberOfOverflowExams" onchange="setInputParameter(this)" placeholder="Average number of overflow exams" value="" />
                         </div>
                         <div class="form-group execute-button">
-                            <input class="btnSubmit" value="Recommend" onclick="requestRecommendation()" />
+                            <div class="row">
+                            <div class="col-md-6">
+                                <input class="btnSubmit" value="Recommend" onclick="requestRecommendation()" />
+                            </div>
+                            <div class="col-md-6">
+                                <input class="btnSubmit" value="Recommend & next" onclick="requestRecommendation()" />
+                            </div>
+                        </div>
                         </div>
                     </form>
                 </div>
@@ -143,7 +174,12 @@
                 Nano_Bank_App demo project © 2021.
             </div>
         </nav>
-        
+
+        <!-- merge invoke stageProgressBar.js from index.js -->
+        <button type="number" id="js-index-merge-progress-next" name="sPB-to-i" value="" hidden  onclick="progressNext()" />
+        <button type="number" id="js-index-merge-progress-next" name="sPB-to-i" value="" hidden  onclick="progressNext()" />
+
     </body>
     <script src="index.js"></script>
+    <script src="stageProgressBar.js"></script>
 </html>

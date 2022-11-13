@@ -1,5 +1,5 @@
 .login-container{
-    margin-top: 5%;
+    margin-top: 2%;
     margin-bottom: 5%;
 }
 .login-form-1{
@@ -26,9 +26,10 @@
 .btnSubmit
 {
     text-align: center;
-    width: 50%;
-    border-radius: 1rem;
-    margin-top: 100px;
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
+    margin-top: 50px;
     padding: 1.5%;
     border: none;
     cursor: pointer;
@@ -89,4 +90,8 @@
 
 .form-control{
     margin-top: 5px;
+}
+
+.execute-button {
+    width: 100%;
 }
