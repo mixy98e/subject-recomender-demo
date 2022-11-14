@@ -6,23 +6,32 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="stageProgressBar-styles.css">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <title>Sub and module recommender</title>
+        <title>Subj and module recommender</title>
     </head>
 
     <body onload="onloadBody()">
+
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#"><strong>SUBJECT & MODULE RECOMMENDER DEMO</strong></a>
         </nav>
+
+        <div  class="alert alert-primary" role="alert">
+                
+        </div>
+        <div  class="alert alert-danger" role="alert">
+    
+        </div>
+
         <div class="flex-center-container">
             <div class="stage-progress-bar-container">
                 <div id="progress">
                     <div id="progress-bar"></div>
                     <ul id="progress-num">
-                    <li class="step active">Predict</li>
-                    <li class="step">Module</li>
-                    <li class="step">Subject 1</li>
-                    <li class="step">Subject 2</li>
-                    <li class="step">Subject 3</li>
+                        <li class="step active">Predict</li>
+                        <li class="step">Module</li>
+                        <li class="step">Subject 1</li>
+                        <li class="step">Subject 2</li>
+                        <li class="step">Subject 3</li>
                     </ul>
                 </div>
             </div>
@@ -31,19 +40,18 @@
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <h3>Student data entry form</h3>
-                    <form>
+                    <form onsubmit="return false">
                         <div class="form-group">
                             <label style="margin-left: 20px;" for="exampleFormControlSelect2"><strong>Select Action</strong></label>
                             <select class="form-control" id="exampleFormControlSelect2" onchange="">
-                                <option>Separate recommandation</option>
                                 <option>Per stage recommandation</option>
                             </select>
-                            <input type="number" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" />
+                            <!-- <input type="number" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" /> -->
                         </div>
 
                         <div class="form-group">
                             <label style="margin-left: 20px;" for="exampleFormControlSelect1"><strong>Select Action</strong></label>
-                            <select class="form-control" id="exampleFormControlSelect1" onchange="setTypeInputParameter(this)">
+                            <select class="form-control" disabled id="exampleFormControlSelect1" onchange="setTypeInputParameter(this)">
                                 <option>Module</option>
                                 <option>Subject 1</option>
                                 <option>Subject 2</option>
@@ -55,7 +63,10 @@
                         <div class="form-group separator"></div>
                         
                         <div class="form-group">
-                            <input type="text" class="form-control inp-gender" name="gender" onchange="setInputParameter(this)" placeholder="Gender" value="" />
+                            <select class="form-control inp-gender" name="gender" onchange="setInputParameter(this)" id="exampleFormControlSelect3">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
                             <input type="text" class="form-control inp-age" name="age" onchange="setInputParameter(this)" placeholder="Age" value="" />
                             <input type="number" class="form-control inp-avg-grade" name="averageGrade" onchange="setInputParameter(this)" placeholder="Average grade" value="" />
                             <input type="number" class="form-control inp-final-grade" name="finalGrade" onchange="setInputParameter(this)" placeholder="Final grade" value="" />
@@ -66,12 +77,11 @@
                             <input type="number" class="form-control inp-avg-ovf-exam" name="averageNumberOfOverflowExams" onchange="setInputParameter(this)" placeholder="Average number of overflow exams" value="" />
                         </div>
                         <div class="form-group execute-button">
-                            <div class="row">
-                            <div class="col-md-6">
-                                <input class="btnSubmit" value="Recommend" onclick="requestRecommendation()" />
+                        <div class="row">
+                            <div class="col-md-8">
                             </div>
-                            <div class="col-md-6">
-                                <input class="btnSubmit" value="Recommend & next" onclick="requestRecommendation()" />
+                            <div class="col-md-4">
+                                <button class="btnSubmit" value="Recommend" onclick="requestRecommendation()" >Recommend</button>
                             </div>
                         </div>
                         </div>
@@ -105,7 +115,7 @@
                     </form> -->
                     <form>
                     <div class="form-group-2">
-                        <label style="margin-left: 20px;" for="exampleFormControlSelect2"><strong>Select data type</strong></label>
+                        <label style="margin-left: 20px;" for="exampleFormControlSelect2"><strong>Select preview data type</strong></label>
                         <select class="form-control" id="exampleFormControlSelect2" onchange="setSourceDataTableView(this)">
                             <option>Modules</option>
                             <option>Subjects</option>
@@ -148,7 +158,7 @@
                 
             </div>
             <div  class="alert alert-danger" role="alert">
-                
+
             </div>
             <br>
             <div class="row tb-row" style="border-top: 1px solid lightgray;">
@@ -171,7 +181,8 @@
         </div>
         <nav class="navbar navbar-light bg-light">
             <div style="text-align: end; width:100%">
-                Nano_Bank_App demo project © 2021.
+                Subject and Module recommender demo project © 2022.<br>
+                Using ML.NET
             </div>
         </nav>
 

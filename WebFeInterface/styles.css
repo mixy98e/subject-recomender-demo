@@ -27,21 +27,21 @@
 {
     text-align: center;
     width: 100%;
-    height: 30px;
+    height: 40px;
     border-radius: 20px;
     margin-top: 50px;
     padding: 1.5%;
     border: none;
     cursor: pointer;
 }
-.login-form-1 .btnSubmit{
+.login-form-1 .btnSubmit {
     font-weight: 600;
     color: #fff;
-    background-color: #0062cc;
+    background-color: #0d6efd;
 }
-.login-form-2 .btnSubmit{
+.login-form-2 .btnSubmit {
     font-weight: 600;
-    color: #0062cc;
+    color: #0d6efd;
     background-color: #fff;
 }
 .login-form-2 .ForgetPwd{
@@ -50,7 +50,7 @@
     text-decoration: none;
 }
 .login-form-1 .ForgetPwd{
-    color: #0062cc;
+    color: #0d6efd;
     font-weight: 600;
     text-decoration: none;
 }
@@ -94,4 +94,15 @@
 
 .execute-button {
     width: 100%;
+}
+
+.btnSubmitAlt {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
+    margin-top: 50px;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
 }

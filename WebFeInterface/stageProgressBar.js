@@ -22,9 +22,6 @@ function progressPrev(event) {
     updateProgress();
 }
 
-function test123() {
-    console.log('PROSOO')
-}
 
 const updateProgress = () => {
     // toggle active class on list items
@@ -39,12 +36,12 @@ const updateProgress = () => {
     progressBar.style.width = 
       ((active - 1) / (steps.length - 1)) * 100 + "%";
     // enable disable prev and next buttons
-    if (active === 1) {
-      progressPrevElement.disabled = true;
-    } else if (active === steps.length) {
-      progressNextElement.disabled = true;
-    } else {
-      progressPrevElement.disabled = false;
-      progressNextElement.disabled = false;
-    }
+    // if (active === 1) {
+    //   progressPrevElement.disabled = true;
+    // } else if (active === steps.length) {
+    //   progressNextElement.disabled = true;
+    // } else {
+    //   progressPrevElement.disabled = false;
+    //   progressNextElement.disabled = false;
+    // }
 };

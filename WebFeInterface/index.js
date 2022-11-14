@@ -3,14 +3,21 @@ function onloadBody() {
   loadModulesTables();
   resetPredictionResultTable();
 
-  document.querySelector(".alert-danger").hidden = true;
-  document.querySelector(".alert-primary").hidden = true;
+  resetAlerts();
 
   document.querySelector(".subject-data-cont").style.display = "none";
   document.querySelector(".module-data-cont").style.display = "block";
 
   document.querySelector(".inp-chs-module-id").style.display = "none";
 }
+
+
+let inputTypes = [ 
+  'Module', 
+  'Subject 1', 
+  'Subject 2', 
+  'Subject 3' 
+];
 
 let mockApiResponse = {
   prediction: 0,
@@ -58,6 +65,7 @@ let modules = [
   "MOD04CS,Data engineering",
 ];
 
+
 function getSubjectByIndex(index, part = "all") {
   if(part === "all")
     return modules[index - 1];
@@ -66,6 +74,7 @@ function getSubjectByIndex(index, part = "all") {
   return null;
 }
 
+
 function getModulesByIndex(index, part = "all") {
   if(part === "all")
     return modules[index - 1];
@@ -73,6 +82,7 @@ function getModulesByIndex(index, part = "all") {
     return modules[index - 1].split(",")[part];
   return null
 }
+
 
 let inputFormStructure = {
   type: "Module",
@@ -88,6 +98,7 @@ let inputFormStructure = {
   chosenModuleID: 0,
 };
 
+
 function setInputParameter(event) {
   console.log(event);
   console.log(event.name, event.option);
@@ -95,6 +106,7 @@ function setInputParameter(event) {
   inputFormStructure[event.name] = event.value;
   console.log(inputFormStructure);
 }
+
 
 function setTypeInputParameter(event) {
   console.log(event);
@@ -108,10 +120,12 @@ function setTypeInputParameter(event) {
   console.log(inputFormStructure);
 }
 
+
 function requestRecommendation(event) {
-  console.log("Recommending api called");
+  console.log("Recommendation api called");
   callRecommendationService(inputFormStructure.type);
 }
+
 
 function loadSubjectsTables() {
   let tblBody = document.querySelector(".subject-table-body-data");
@@ -136,6 +150,7 @@ function loadSubjectsTables() {
   });
 }
 
+
 function loadModulesTables() {
   let tblBody = document.querySelector(".module-table-body-data");
   tblBody.innerHTML = "";
@@ -156,6 +171,7 @@ function loadModulesTables() {
   });
 }
 
+
 function setSourceDataTableView(event) {
   console.log(event.value);
   if (event.value === "Subjects") {
@@ -167,6 +183,7 @@ function setSourceDataTableView(event) {
   }
 }
 
+
 function getSubEndPoint(type) {
   if (type === "Module") return "m";
   else if (type === "Subject 1") return "s1";
@@ -174,6 +191,7 @@ function getSubEndPoint(type) {
   else if (type === "Subject 3") return "s3";
   else return "";
 }
+
 
 function callRecommendationService(type) {
   console.log("fetch", type);
@@ -199,8 +217,9 @@ function callRecommendationService(type) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Success:", data);
-      SuccessfullRequest("Recommendation action successfully to executed!");
+      successfullRequest("Recommendation action successfully to executed!");
       processRecommenderResponseData(type, data);
+      invokeExternalIndex("progressNext");
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -208,20 +227,35 @@ function callRecommendationService(type) {
     });
 }
 
+
 function failedRequest(text) {
-  document.querySelector(".alert-danger").innerHTML = text;
-  document.querySelector(".alert-danger").hidden = false;
-  setTimeout(() => {
-    document.querySelector(".alert-danger").hidden = true;
-  }, 2000);
+  let alertItems = document.querySelectorAll(".alert-danger");
+  alertItems.forEach(el => {
+    el.innerHTML = text;
+    el.hidden = false;
+    setTimeout(() => {
+      el.hidden = true;
+    }, 2000);
+  })
 }
 
-function SuccessfullRequest(text) {
-  document.querySelector(".alert-primary").innerHTML = text;
-  document.querySelector(".alert-primary").hidden = false;
-  setTimeout(() => {
-    document.querySelector(".alert-primary").hidden = true;
-  }, 2000);
+
+function successfullRequest(text) {
+  let alertItems = document.querySelectorAll(".alert-primary");
+  alertItems.forEach(el => {
+    el.innerHTML = text;
+    el.hidden = false;
+    setTimeout(() => {
+      el.hidden = true;
+    }, 2000);
+  })
+}
+
+function resetAlerts() {
+  let alertsErr = document.querySelectorAll(".alert-danger");
+  let alertsScs = document.querySelectorAll(".alert-primary");
+  alertsErr.forEach(el => el.hidden = true);
+  alertsScs.forEach(el => el.hidden = true);
 }
 
 
@@ -240,7 +274,9 @@ RECOMMENDATION DATA MODEL
 //   ]
 // }
 
+
 function processRecommenderResponseData(objType, data) {
+  selectNextStageOption()
   let objectType = objType
   let objectId = data.prediction;
   let objectName = objType === 'Module' ? 
@@ -248,7 +284,7 @@ function processRecommenderResponseData(objType, data) {
                   getSubjectByIndex(data.prediction, 1);
         
   if( objType === 'Module')
-    lastPredictedModuleId = prediction;
+    lastPredictedModuleId = data.prediction;
 
   let maxScore = calculateMaximumScore(data.score);
   let averageScore = calculateAverageScore(data.score);
@@ -261,7 +297,8 @@ function processRecommenderResponseData(objType, data) {
                                   averageScore,
                                   minScore);
 }
-    
+   
+
 function calculateAverageScore(array) {
   let sum = 0;
   array.forEach(el => {
@@ -269,6 +306,7 @@ function calculateAverageScore(array) {
   });
   return sum / array.length;
 }
+
 
 function calculateMaximumScore(array) {
   if(array.length > 0) {
@@ -282,6 +320,7 @@ function calculateMaximumScore(array) {
   return null;
 }
 
+
 function calculateMinimumScore(array) {
   if(array.length > 0) {
     let minEl = array[0];
@@ -294,11 +333,13 @@ function calculateMinimumScore(array) {
   return null;
 }
 
+
 function resetPredictionResultTable() {
   let tblBody = document.querySelector(".table-body-data");
   tblBody.innerHTML = "";
   lastPredictedModuleId = -1;
 }
+
 
 function loadPredictionResultInDatatable(type, id, name, max, avg, min) {
   let tblBody = document.querySelector(".table-body-data");
@@ -324,7 +365,9 @@ function loadPredictionResultInDatatable(type, id, name, max, avg, min) {
   tblBody.appendChild(row);
 }
 
+
 let lastPredictedModuleId = -1;
+
 
 function invokeExternalIndex(externalFunctionName) {
   switch (externalFunctionName) {
@@ -340,4 +383,13 @@ function invokeExternalIndex(externalFunctionName) {
     default: break;
   }
   console.log('External function: -> ' + externalFunctionName + '() has been invoked');
+}
+
+
+let type = 0;
+
+function selectNextStageOption() {
+  type++;
+  document.querySelector('#exampleFormControlSelect1').value = inputTypes[type]
+  inputFormStructure.type = inputTypes[type];
 }
