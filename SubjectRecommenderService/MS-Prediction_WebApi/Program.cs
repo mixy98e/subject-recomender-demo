@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.ML;
 using Microsoft.OpenApi.Models;
+using ModuleDependentSubjectsPrediction_CA;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
@@ -21,6 +22,9 @@ builder.Services.AddPredictionEnginePool<Subject3Prediction.ModelInput, Subject3
 
 builder.Services.AddPredictionEnginePool<ModulePrediction.ModelInput, ModulePrediction.ModelOutput>()
     .FromFile("ModulePrediction.zip");
+
+builder.Services.AddPredictionEnginePool<ModuleDependentSubjects.ModelInput, ModuleDependentSubjects.ModelOutput>()
+    .FromFile("ModuleDependentSubjects.zip");
 
 
 // Configure endpoints and open api
@@ -74,6 +78,10 @@ app.MapPost("/s3",
 
 app.MapPost("/m",
    async (PredictionEnginePool<ModulePrediction.ModelInput, ModulePrediction.ModelOutput> predictionEnginePool, ModulePrediction.ModelInput input) =>
+        await Task.FromResult(predictionEnginePool.Predict(input)));
+
+app.MapPost("/mds",
+   async (PredictionEnginePool<ModuleDependentSubjects.ModelInput, ModuleDependentSubjects.ModelOutput> predictionEnginePool, ModuleDependentSubjects.ModelInput input) =>
         await Task.FromResult(predictionEnginePool.Predict(input)));
 
 

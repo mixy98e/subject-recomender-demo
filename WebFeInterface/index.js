@@ -16,7 +16,9 @@ let inputTypes = [
   'Module', 
   'Subject 1', 
   'Subject 2', 
-  'Subject 3' 
+  'Subject 3',
+  'Module subjects pair',
+  'No more objects...'
 ];
 
 let mockApiResponse = {
@@ -65,6 +67,33 @@ let modules = [
   "MOD04CS,Data engineering",
 ];
 
+let moduleDependentSubjects = [
+  [
+    "2MRZISI1,Database management systems",
+    "2MRZISI2,Intelligent transport systems",
+    "2MRZISI3,Ubiquitous computing",
+    "2MRZISI4,Virtual and augmented reality systems"
+  ],
+  [
+    "2MRZIBRS1,High reliability systems",
+    "2MRZIBRS2,Algorithms and architectures of specialized computer systems",
+    "2MRZIBRS3,Computer-based sensor systems",
+    "2MRZIBRS4,Blockchain technology"
+  ],
+  [
+    "2MRZIIST1,Spectral techniques",
+    "2MRZIIST2,2MRZIIST1,Advanced techniques in 3D modeling and animation",
+    "2MRZIIST3,Intelligent information systems",
+    "2MRZIIST4,Fuzzy logic"
+  ],
+  [
+    "2MRZIIP1,Natural language processing",
+    "2MRZIIP2,Analysis of social networks",
+    "2MRZIIP3,Business intelligence",
+    "2MRZIIP4,Deep learning"
+  ]
+];
+
 
 function getSubjectByIndex(index, part = "all") {
   if(part === "all")
@@ -81,6 +110,14 @@ function getModulesByIndex(index, part = "all") {
   if(part >= 0 && part <= 1)
     return modules[index - 1].split(",")[part];
   return null
+}
+
+function getModuleDependentSubjectByModuleByIndex(moduleIndex, subjectIndex, part = "all") {
+  if(part === "all")
+    return moduleDependentSubjects[moduleIndex - 1][subjectIndex - 1];
+  if(part >= 0 && part <= 1)
+    return moduleDependentSubjects[moduleIndex - 1][subjectIndex - 1].split(",")[part];
+  return null;
 }
 
 
@@ -189,12 +226,19 @@ function getSubEndPoint(type) {
   else if (type === "Subject 1") return "s1";
   else if (type === "Subject 2") return "s2";
   else if (type === "Subject 3") return "s3";
+  else if (type === "Module subjects pair") return "mds";
   else return "";
 }
 
 
 function callRecommendationService(type) {
-  console.log("fetch", type);
+  let moduleParam = -1;
+  if (getSubEndPoint(type) === "mds" && lastPredictedModuleId != -1) {
+    moduleParam = lastPredictedModuleId
+  } else if (getSubEndPoint(type) === "mds" && lastPredictedModuleId == -1) {
+    failedRequest("Valid module ID needed for module dependent subject prediction!");
+  }
+
   fetch("https://localhost:5551/" + getSubEndPoint(type), {
     method: "POST",
     headers: {
@@ -211,7 +255,7 @@ function callRecommendationService(type) {
               "averagE_TEST_TAKEN": ${inputFormStructure.averageNumberOfTestTaken},
               "maX_TEST_TAKEN": ${inputFormStructure.maximumNumberOfTestTaken},
               "averagE_OVERFLOW_EXAM": ${inputFormStructure.averageNumberOfOverflowExams},
-              "chooseN_MODULE_ID": -1
+              "chooseN_MODULE_ID": ${moduleParam}
             }`,
   })
     .then((response) => response.json())
@@ -276,19 +320,45 @@ RECOMMENDATION DATA MODEL
 
 
 function processRecommenderResponseData(objType, data) {
-  selectNextStageOption()
-  let objectType = objType
+  selectNextStageOption();
+  let objectType = objType;
   let objectId = data.prediction;
-  let objectName = objType === 'Module' ? 
-                  getModulesByIndex(data.prediction, 1) :
-                  getSubjectByIndex(data.prediction, 1);
-        
-  if( objType === 'Module')
-    lastPredictedModuleId = data.prediction;
+  // let objectName = objType === 'Module' ? 
+  //                 getModulesByIndex(data.prediction, 1) :
+  //                 getSubjectByIndex(data.prediction, 1);
 
   let maxScore = calculateMaximumScore(data.score);
   let averageScore = calculateAverageScore(data.score);
   let minScore = calculateMinimumScore(data.score);
+
+  let objectId_secondary;
+  let objectName_secondary;
+
+  console.log(objType)
+
+  if ( objType === 'Module'){
+    objectName = getModulesByIndex(data.prediction, 1);
+  }
+  else if ( objType === 'Module subjects pair') {
+    objectId = data.prediction % 10;
+    objectName = getModuleDependentSubjectByModuleByIndex(lastPredictedModuleId, objectId, 1);
+    objectId_secondary = (data.prediction - (data.prediction % 10)) / 10;
+    objectName_secondary = getModuleDependentSubjectByModuleByIndex(lastPredictedModuleId, objectId_secondary, 1);
+    loadPredictionResultInDatatable(objType,
+                                    objectId_secondary,
+                                    objectName_secondary,
+                                    maxScore,
+                                    averageScore,
+                                    minScore);
+    invokeExternalIndex("progressNext");
+  }
+  else {
+    objectName = getSubjectByIndex(data.prediction, 1);
+  }
+    
+  if( objType === 'Module') {
+    lastPredictedModuleId = data.prediction;
+  }
 
   loadPredictionResultInDatatable(objType,
                                   objectId,
@@ -297,7 +367,7 @@ function processRecommenderResponseData(objType, data) {
                                   averageScore,
                                   minScore);
 }
-   
+
 
 function calculateAverageScore(array) {
   let sum = 0;
@@ -378,7 +448,6 @@ function invokeExternalIndex(externalFunctionName) {
     case 'progressPrev' :
       document.getElementById("js-index-merge-progress-next").click()
       break;
-
 
     default: break;
   }
