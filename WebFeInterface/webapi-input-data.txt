@@ -5,12 +5,12 @@ S1:
   "averagE_GRADE": 0,
   "finaL_GRADE": 0,
   "numbeR_OF_YEARS_STUDIED": 0,
-  "yeaR_STUDY_START": 0,
+  "yeaR_STUDY_START": 0, //ignored
   "averagE_TEST_TAKEN": 0,
   "maX_TEST_TAKEN": 0,
   "averagE_OVERFLOW_EXAM": 0,
   "chooseN_MODULE_ID": 0,
-  "chooseN_SUBJECT_ID_1_BLOCK_A": 0 // should be removed from input model
+  "chooseN_SUBJECT_ID_1_BLOCK_A": 0 //resulted
 }
 
 s2:
@@ -20,12 +20,12 @@ s2:
   "averagE_GRADE": 0,
   "finaL_GRADE": 0,
   "numbeR_OF_YEARS_STUDIED": 0,
-  "yeaR_STUDY_START": 0,
+  "yeaR_STUDY_START": 0, //ignored
   "averagE_TEST_TAKEN": 0,
   "maX_TEST_TAKEN": 0,
   "averagE_OVERFLOW_EXAM": 0,
   "chooseN_MODULE_ID": 0,
-  "chooseN_SUBJECT_ID_2_BLOCK_A": 0 // should be removed from input model
+  "chooseN_SUBJECT_ID_2_BLOCK_A": 0 //resulted
 }
 
 s3:
@@ -35,25 +35,40 @@ s3:
   "averagE_GRADE": 0,
   "finaL_GRADE": 0,
   "numbeR_OF_YEARS_STUDIED": 0,
-  "yeaR_STUDY_START": 0,
+  "yeaR_STUDY_START": 0, //ignored
   "averagE_TEST_TAKEN": 0,
   "maX_TEST_TAKEN": 0,
   "averagE_OVERFLOW_EXAM": 0,
   "chooseN_MODULE_ID": 0,
-  "chooseN_SUBJECT_ID_3_BLOCK_A": 0 // should be removed from input model
+  "chooseN_SUBJECT_ID_3_BLOCK_A": 0 //resulted
 }
 
 m:
 {
-  "id": 0, // should be removed from input model
+  "id": 0, //ignored
   "gender": "string",
   "age": 0,
   "averagE_GRADE": 0,
   "finaL_GRADE": 0,
   "numbeR_OF_YEARS_STUDIED": 0,
-  "yeaR_STUDY_START": 0,
+  "yeaR_STUDY_START": 0, //ignored
   "averagE_TEST_TAKEN": 0,
   "maX_TEST_TAKEN": 0,
   "averagE_OVERFLOW_EXAM": 0,
-  "chooseN_MODULE_ID": 0 // should be removed from input model
+  "chooseN_MODULE_ID": 0 //resulted
+}
+
+mds:
+{
+  "gender": "string",
+  "age": 0, //ignored
+  "averagE_GRADE": 0,
+  "finaL_GRADE": 0,
+  "numbeR_OF_YEARS_STUDIED": 0, //ignored
+  "yeaR_STUDY_START": 0,//ignored
+  "averagE_TEST_TAKEN": 0, //ignored
+  "maX_TEST_TAKEN": 0, //ignored
+  "averagE_OVERFLOW_EXAM": 0,
+  "chooseN_MODULE_ID": 0,
+  "modulE_DEPENDENT_SUB_PAIR": 0 //resulted
 }
