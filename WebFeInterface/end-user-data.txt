@@ -30,6 +30,7 @@ var sampleData = new Subject1Prediction.ModelInput()
 //Load model and predict output
 var result = Subject1Prediction.Predict(sampleData);
 
+
 //Load sample data
 var sampleData = new Subject2Prediction.ModelInput()
 {
@@ -46,6 +47,7 @@ var sampleData = new Subject2Prediction.ModelInput()
 //Load model and predict output
 var result = Subject2Prediction.Predict(sampleData);
 
+
 //Load sample data
 var sampleData = new Subject3Prediction.ModelInput()
 {
@@ -61,3 +63,16 @@ var sampleData = new Subject3Prediction.ModelInput()
 };
 //Load model and predict output
 var result = Subject3Prediction.Predict(sampleData);
+
+
+//Load sample data
+var sampleData = new ModuleDependentSubjects.ModelInput()
+{
+    GENDER = @"Male",
+    AVERAGE_GRADE = 6.15F,
+    FINAL_GRADE = 7.15F,
+    AVERAGE_OVERFLOW_EXAM = 2F,
+    CHOOSEN_MODULE_ID = 1F,
+};
+//Load model and predict output
+var result = ModuleDependentSubjects.Predict(sampleData);

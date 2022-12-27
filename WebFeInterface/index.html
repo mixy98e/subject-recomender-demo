@@ -32,6 +32,8 @@
                         <li class="step">Subject 1</li>
                         <li class="step">Subject 2</li>
                         <li class="step">Subject 3</li>
+                        <li class="step step-wide">Module subjects pair</li>
+                        <li class="step">Finished</li>
                     </ul>
                 </div>
             </div>
@@ -56,6 +58,8 @@
                                 <option>Subject 1</option>
                                 <option>Subject 2</option>
                                 <option>Subject 3</option>
+                                <option>Module subjects pair</option>
+                                <option>No more objects...</option>
                             </select>
                             <input type="" class="form-control inp-chs-module-id" name="chosenModuleID" onchange="setInputParameter(this)" placeholder="Chosen module ID" value="" />
                         </div>
@@ -78,10 +82,11 @@
                         </div>
                         <div class="form-group execute-button">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-5">
+                                <!-- <button class="btnSubmit" value="Recommend-auto" onclick="requestRecommendationAuto()" >Recommend auto</button> -->
                             </div>
-                            <div class="col-md-4">
-                                <button class="btnSubmit" value="Recommend" onclick="requestRecommendation()" >Recommend</button>
+                            <div class="col-md-7">
+                                <button class="btnSubmit" value="Recommend" onclick="requestRecommendation()" >Recommend (next step)</button>
                             </div>
                         </div>
                         </div>
@@ -116,9 +121,13 @@
                     <form>
                     <div class="form-group-2">
                         <label style="margin-left: 20px;" for="exampleFormControlSelect2"><strong>Select preview data type</strong></label>
-                        <select class="form-control" id="exampleFormControlSelect2" onchange="setSourceDataTableView(this)">
+                        <select class="form-control info-options" id="exampleFormControlSelect2" onchange="setSourceDataTableView(this)">
                             <option>Modules</option>
                             <option>Subjects</option>
+                            <option>Module: Software engineering</option>
+                            <option>Module: Safety of computer systems</option>
+                            <option>Module: Information systems and technology</option>
+                            <option>Module: Data engineering</option>
                         </select>
                     </div>
                 </form>
@@ -182,7 +191,7 @@
         <nav class="navbar navbar-light bg-light">
             <div style="text-align: end; width:100%">
                 Subject and Module recommender demo project © 2022.<br>
-                Using ML.NET
+                For subject Inteligent Systems using ML.NET<br>
             </div>
         </nav>
 
